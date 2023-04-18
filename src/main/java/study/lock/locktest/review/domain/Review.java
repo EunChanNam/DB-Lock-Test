@@ -14,7 +14,6 @@ import java.util.Set;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String Contents;
@@ -22,10 +21,14 @@ public class Review {
     private int likes = 0;
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private Set<LikeReview> likeReviews = new HashSet<>();
+    private final Set<LikeReview> likeReviews = new HashSet<>();
 
     public Review(String contents) {
         Contents = contents;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void addLike() {
