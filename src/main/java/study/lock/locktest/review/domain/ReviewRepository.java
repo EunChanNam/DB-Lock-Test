@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Lock(LockModeType.PESSIMISTIC_READ)
     @Query("select r from Review r " +
             "where r.id = :id")
     Optional<Review> findWithLikeById(@Param("id") Long id);
